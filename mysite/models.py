@@ -58,7 +58,7 @@ class PostJob(models.Model):
     other_benefits = models.CharField(max_length=100)
     job_location = models.CharField(max_length=120)
     salary = models.CharField(max_length=20, null=True, blank=True)
-    # image = models.ImageField(blank=True, upload_to='media', null=True)
+    image = models.ImageField(blank=True, upload_to='media', null=True)
     application_deadline = models.DateTimeField(null=True, blank=True)
 
     # published_on = models.DateTimeField(default=timezone.now)

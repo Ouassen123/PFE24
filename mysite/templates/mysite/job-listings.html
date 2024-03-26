@@ -33,34 +33,38 @@
 
 <!-- For Post a Job -->
             {% for job_listing in job_listings %}
-            <ul class="job-listings mb-5">
-                <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
-                    <a href="{% url 'job_single' id=job_listing.id %}"></a>
-                    <div class="job-listing-logo">
-                        <img src="{% static 'mysite/images/job_logo_1.jpg' %}"
-                             alt="Free Website Template by Free-Template.co" class="img-fluid">
+        <ul class="job-listings mb-5">
+            <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
+                <a href="{% url 'job_single' id=job_listing.id %}"></a>
+                <div class="job-listing-logo">
+                    {% if job_listing.image %}
+                        <img src="{{ job_listing.image.url }}" alt="{{ job_listing.title }}" class="img-fluid">
+                    {% else %}
+                        <!-- Ajoutez ici une image par défaut si aucune image n'est téléchargée -->
+                        <img src="{% static 'mysite/images/job_logo_1.jpg' %}" alt="Image par défaut" class="img-fluid">
+                    {% endif %}
+                </div>
+
+                <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
+                    <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
+                        <h2>{{ job_listing.title }}</h2>
+                        <strong>{{ job_listing.company_name }}</strong>
                     </div>
-
-                    <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
-                        <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
-                            <h2>{{ job_listing.title }}</h2>
-                            <strong>{{ job_listing.company_name }}</strong>
-                        </div>
-                        <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
-                            <span class="icon-room"></span> {{ job_listing.job_location}}
-                        </div>
-                        <div class="job-listing-meta">
-                            <span class="badge badge-success">{{ job_listing.employment_status }}</span>
-                        </div>
-                        <div class="job-listing-meta">
-                            <span class="badge badge-danger">{{ job_listing.salary }}</span>
-                        </div>
+                    <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
+                        <span class="icon-room"></span> {{ job_listing.job_location}}
                     </div>
+                    <div class="job-listing-meta">
+                        <span class="badge badge-success">{{ job_listing.employment_status }}</span>
+                    </div>
+                    <div class="job-listing-meta">
+                        <span class="badge badge-danger">{{ job_listing.salary }}</span>
+                    </div>
+                </div>
 
-                </li>
+            </li>
+        </ul>
+        {% endfor %}
 
-            </ul>
-            {% endfor %}
 
             <div class="row pagination-wrap">
                 <div class="col-md-6 text-center text-md-left mb-4 mb-md-0">
